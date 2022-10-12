@@ -1,0 +1,49 @@
+<nav class="navbar border-bottom-3 navbar-expand-lg py-3 navbar-light bg-light">
+  <div class="container">
+    <a onclick="fnr()" class="navbar-brand" href="#"><img src="static/images/logo1.png" alt="" width="35" height="35" style="border-radius:50%;" class="d-inline-block  align-text-top mx-2">
+    {{data.brandName}}
+    </a>
+    
+    <div>
+      
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      
+    </button>
+    
+    
+    </div>
+    
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        
+
+        
+        
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/contactUs">contact-us</a>
+          </li>
+          
+           
+
+          {{!-- <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/adminLogin">admin</a>
+          </li> --}}
+
+
+          <li class="nav-item">
+           
+            <a id="login-logo-anchor" class="nav-link active" type="button" aria-current="page" href="/student-login">{{loginLogoName}}</a>
+          </li>
+        
+      </ul>
+      
+    </div>
+  </div>
+</nav>
+
+

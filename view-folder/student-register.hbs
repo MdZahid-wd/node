@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/static/css/style.css">
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/js/all.min.js"
+    integrity="sha512-naukR7I+Nk6gp7p5TMA4ycgfxaZBJ7MO5iC3Fp6ySQyKFHOGfpkSZkYVWV5R7u7cfAicxanwYQ5D1e17EfJcMA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+  <title>home page</title>
+</head>
+
+<body class="student-body">
+  {{>navbar}}
+
+  
+  {{!-- contact us section --}}
+  <section id="contact-us-section" class="py-4 student-section">
+    <div class="container">
+      <div class="raw">
+        <div class="col-md-12 student-form-div">
+
+          <form class="student-register-form " action="/student-register" method="post">
+
+            <h2 class="text-center text-secondary">Student Register</h2>
+
+            <div class="mb-3">
+              <label for="contactNumberField" class="form-label">Name</label>
+              <input name="name" type="text" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Email address</label>
+              <input name="email" type="email" placeholder="{{emailExists}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+              <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+            </div>
+
+            <div class="mb-3">
+              <label for="contactNumberField" class="form-label">Address</label>
+              <input name="address" type="text" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="contactNumberField" class="form-label">class</label>
+              <input name="class" type="number" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="contactNumberField" class="form-label">Contact number</label>
+              <input name="phone" type="number" class="form-control" id="contactNumberField" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="contactNumberField" class="form-label">set password</label>
+              <input name="password1" type="password" class="form-control" required placeholder="{{passwordMatch}}">
+            </div>
+
+            <div class="mb-3">
+              <label for="contactNumberField" class="form-label">retype password</label>
+              <input name="password2" type="password" class="form-control" required placeholder="{{passwordMatch}}">
+            </div>
+
+            <div class="container text-center">
+              <button type="submit" class="btn btn-dark">Submit</button>
+            </div>
+        
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="login-btn-section">
+    <div class="login-btn-div">
+        <a class="btn btn-primary" href="/student-login" role="button">login</a>
+        <div id="emailHelp" class="form-text">go to login</div>
+    </div>
+        
+  </section>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,94 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/static/css/style.css">
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/js/all.min.js"
+    integrity="sha512-naukR7I+Nk6gp7p5TMA4ycgfxaZBJ7MO5iC3Fp6ySQyKFHOGfpkSZkYVWV5R7u7cfAicxanwYQ5D1e17EfJcMA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+  <title>home page</title>
+</head>
+
+<body>
+  {{>navbar loginLogoName=loginLogoName}}
+  <section class="adminVideoUpdate-section">
+  
+        <a href="/adminBack" for="button" class="btn backArrow-anchor"><</a>
+        
+        {{!-- first admin manage coloum --}}
+        <div class="container">
+          
+        <div class="row">
+            <div class="col-md-6 m-auto">
+                
+            
+                <h1 class="text-center display-4 my-4">Create course</h1>
+                <iframe style="display:none ;"></iframe>
+                <form name="vd" action="/adminVideoUpload" method="post" enctype="multipart/form-data" onsubmit="fn()">
+
+                <label for="contactNumberField" class="form-label">enter title</label>
+                <input name="title" type="text" class="form-control" id="contactNumberField" required >
+
+                <label for="contactNumberField" class="form-label">enter description</label>
+                <input name="description" type="text" class="form-control" id="contactNumberField" required >
+                 
+                    <label for="file" class="form-label chooseFile-label">upload course's thumbnail</label>
+                    <input type="file" accept="image/*" name="imageFile" id="file" class="custome-file-input"  required>
+                    <label for="file" class="form-label chooseFile-label">upload files(optional)</label>
+                    <input type="file" accept="file_extension" name="txtFile" id="file" class="custome-file-input" multiple>
+                    
+                    <button id="button"  class="btn btn-primary btn-block" type="submit">
+                      create
+                      
+                    </button>
+                      <label id="demo"></label>
+                    
+                    
+                    
+                    
+                  
+
+                     <script>
+                      function fn(){
+                            document.getElementById("button").innerHTML="uploading...";  
+                      }
+                      </script>
+                    {{#if success}}  
+                     <script>
+                          document.getElementById("demo").innerHTML="successfully uploaded";
+                          setInterval(function(){
+                              document.getElementById("demo").innerHTML="";
+                          },2000);
+                          document.getElementById("button").innerHTML="upload";
+
+                     </script>
+                     
+                     
+                    {{/if}}   
+                     
+                </form>
+            </div>
+        </div>
+    </section>
+   
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>

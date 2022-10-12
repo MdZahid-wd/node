@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/static/css/style.css">
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/js/all.min.js"
+    integrity="sha512-naukR7I+Nk6gp7p5TMA4ycgfxaZBJ7MO5iC3Fp6ySQyKFHOGfpkSZkYVWV5R7u7cfAicxanwYQ5D1e17EfJcMA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+  <title>home page</title>
+</head>
+
+<body>
+  {{>navbar loginLogoName=loginLogoName}}
+  {{>slider slider=slider}}
+  
+    <section class="contact-heading-section">
+           
+       <h1>contact-us</h1>
+       <div id="button-button-button-div">
+         <button class="button-button-button" onclick="fnbtn1()"></button>
+         <button class="button-button-button" onclick="fnbtn2()"></button>
+         <button class="button-button-button" onclick="fnbtn3()"></button>
+       </div>
+       
+    
+
+    </section>
+    <section class="contact-body-section">
+      <div class="contact-body-div">
+        <h2>course related question</h2>
+      
+      <p>if you have any question regarding course call on this number</p>
+      <p>you can also send question on email</p>
+      <h5>phone no:-<span>xxxxxxxxxxxx</span></h5>
+      <h5>email:-<span>zahdimdjs@gmail.com</span></h5>
+
+      <p>.........................................................................................</p>
+      <h2>teachers contact will be share after taking course</h2>
+      <p>.........................................................................................</p>
+      <p>if you wanna give feedback about website or any problem facing with this website.
+        <p>we will fix as quick as possible</p>
+      <h5>email:-<span>zahdimdjs@gmail.com</span></h5>
+      <p>.........................................................................................</p>
+      </div>
+    </section>
+    <section class="contact-body-section">
+      <div class="contact-body-div">
+        <a id="login-button-button" class="btn btn-light" type="button" href="/adminLogin" hidden>admin</a>
+      </div>
+    </section>
+    <script>
+      var x=0
+      function fnbtn1(){
+        x=1;
+      }
+      function fnbtn2(){
+          if(x==2){
+            x=3;
+          }
+      }
+      function fnbtn3(){
+          if(x==1){
+            x=2;
+          }
+      }
+      function fnr(){
+        if(x==3){
+          document.getElementById("login-button-button").removeAttribute('hidden');
+        }
+        
+      }
+    </script>
+
+        
+        
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>
