@@ -223,7 +223,6 @@ routes.post("/student-login",async(req,res)=>{
                 
 
                  const user={id:data._id};
-                 console.log(user);
                  const token=await jwt.sign(user,process.env.JWT_SECRET_KEY,{expiresIn:'1h'});
 
                 
