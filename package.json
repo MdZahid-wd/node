@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/app.js"
+    "start": "nodemon src/app.js"
   },
   "author": "Md Zahid",
   "license": "ISC",
@@ -35,8 +35,5 @@
     "querystring": "^0.2.1",
     "socket.io": "^4.5.2",
     "user-agents": "^1.0.1156"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.20"
   }
 }

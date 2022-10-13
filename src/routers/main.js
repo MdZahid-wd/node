@@ -212,7 +212,6 @@ routes.post("/student-login",async(req,res)=>{
     console.log("form is submitted");
     console.log(req.body.email);
     const data=await student.findOne({"email":req.body.email});
-    console.log(data);
     if(data==null){
         res.render("student-login",{loginLogoName:"Login",emailExists:"invalid email"})
             console.log("email already exist");
@@ -224,7 +223,10 @@ routes.post("/student-login",async(req,res)=>{
 
                  const user={id:data._id};
                  const token=await jwt.sign(user,process.env.JWT_SECRET_KEY,{expiresIn:'1h'});
-
+                 console.log('........ttttttttt.......')
+                 console.log(token.size);
+                 console.log('........ttttttttt.......')
+                 console.log(user);
                 
                 res.cookie('jwts',token,{expires:new Date(Date.now()+60*60*1000),httpOnly:true});
                     
