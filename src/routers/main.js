@@ -120,7 +120,7 @@ async function auths(req,res,next){
             
            console.log(token);
            try{
-            const verifyUser=jwt.verify(token,'jkfsjeijfeijefijfisjfks');
+            const verifyUser=jwt.verify(token,process.env.JWT_SECRET_KEY);
             console.log(verifyUser.id)
             req.data=await student.findOne({"_id":verifyUser.id});
             
@@ -170,7 +170,7 @@ async function loginPresent(req,res,next){
         else{
             console.log(token);
            try{
-            const verifyUser=jwt.verify(token,'jkfsjeijfeijefijfisjfks');
+            const verifyUser=jwt.verify(token,process.env.JWT_SECRET_KEY);
             console.log(verifyUser.id)
             const data=await student.findOne({"_id":verifyUser.id});
             req.login=data.name.split(' ')[0];
@@ -222,7 +222,7 @@ routes.post("/student-login",async(req,res)=>{
                 
 
                  const user={id:data._id};
-                 const token=await jwt.sign(user,"jkfsjeijfeijefijfisjfks",{expiresIn:'1h'});
+                 const token=await jwt.sign(user,process.env.JWT_SECRET_KEY,{expiresIn:'1h'});
                  console.log('........ttttttttt.......')
                  console.log(token);
                  console.log('........ttttttttt.......')
@@ -302,7 +302,7 @@ routes.post("/adminUpdate",async(req,res)=>{
                 console.log("email exists");
                 
                 const user={id:data._id};
-                const token=await jwt.sign(user,'jkfsjeijfeijefijfisjfks',{expiresIn:'1h'});
+                const token=await jwt.sign(user,process.env.JWT_SECRET_KEY,{expiresIn:'1h'});
 
                 
                 res.cookie('jwta',token,{expires:new Date(Date.now()+60*60*1000),httpOnly:true});
