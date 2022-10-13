@@ -220,13 +220,13 @@ routes.post("/student-login",async(req,res)=>{
     else{
             if(data.password1==req.body.password){
             
-                loginButtonActive=true;
+                // loginButtonActive=true;
 
-                const user={id:data._id};
-                const token=await jwt.sign(user,process.env.JWT_SECRET_KEY,{expiresIn:'1h'});
+                // const user={id:data._id};
+                // const token=await jwt.sign(user,process.env.JWT_SECRET_KEY,{expiresIn:'1h'});
 
                 
-                res.cookie('jwts',token,{expires:new Date(Date.now()+60*60*1000),httpOnly:true});
+                // res.cookie('jwts',token,{expires:new Date(Date.now()+60*60*1000),httpOnly:true});
                     
                 res.render("course-videos",{loginLogoName:data.name.split(' ')[0]});
                 console.log("email exists");
