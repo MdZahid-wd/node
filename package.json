@@ -35,9 +35,9 @@
     "querystring": "^0.2.1",
     "socket.io": "^4.5.2",
     "user-agents": "^1.0.1156"
-    "nodemon": "^2.0.19"
+    
   },
   "devDependencies": {
-    
+    "nodemon": "^2.0.19"
   }
 }
