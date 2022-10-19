@@ -1,4 +1,5 @@
-<!doctype html>
+
+      <!doctype html>
 <html lang="en">
 
 <head>
@@ -22,55 +23,56 @@
 
 <body>
   {{>navbar loginLogoName=loginLogoName}}
+  {{>slider slider=slider}}
   
-  <section id="services-section" class="py-3">
+    
+
+
+
+    <section id="services-section" class="py-3">
     <div class="container">
 
-      <h1 class="text-center text-secondary">videos</h1>
+      <h1 class="text-center text-secondary">courses</h1>
 
       <div class="row mt-3">
 
         {{!-- first service coloum --}}
-        {{#each service}}
-        <div class="col-md-4">
-          <div class="card my-3">
+        {{#each course}}
+        <div class="col-md-6">
+          <div class="card">
             <div class="card-body">
-
-              <div class="container service-icon text-center py-3">
-                <i class="{{this.icon}} text-secondary"></i>
-              </div>
-
-              <h3 class="card-title">{{this.title}}</h3>
-
-              <p>{{this.description}}</p>
-
-              <a href="/playVideo">watch</a>
-
-              
-
+                  
+                  <div class="container service-icon text-center py-3">
+                    <i class="{{this.icon}} text-secondary"></i>
+                  </div>
+                  <div class="indexcourse-div">
+                 <a class="btn btn-light" id="course-anchor" type="button" href="/course/{{this.courseNo}}"><span id="explore-span-id">explore</span></a>
+                  </div>
             </div>
           </div>
         </div>
-        {{/each}}
+         {{/each}}
         {{!-- first service coloum --}}
 
 
       </div>
     </div>
-  </section>
   
-    
-  
-     
-            <form class="" action="/paynow" method="post">
-              
-              <div class="form-group">
-                <button class="btn form-control btn-primary">Proceed to Pay</button>
-              </div>
-            </form>
-        
-  </section>
 
+
+
+ 
+
+
+    
+        
+   
+
+
+    
+
+
+    
   
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"

@@ -190,10 +190,17 @@ res.status(401),send(e);
 routes.get("/",loginPresent,async(req,res)=>{
     
     const videos=await Videos.find();
-    console.log(videos)
+    
     const course=await Course.find();
+    var videosArrays=[];
+    for(i=0;i<course[0].demoVideos.length;i++){
+          const video=await Videos.findOne({"video":course[0].demoVideos[i]})
+          videosArrays[i]=video;
+        
+    }
+    console.log(videosArrays[0])
     const slider=await Slider.findOne({"_id":"630d924e7c4d3393d869ef71"});
-    res.render("index",{loginLogoName:req.login,slider:slider,course:course,videos:videos});
+    res.render("index",{loginLogoName:req.login,slider:slider,course:course,videos:videosArrays});
 });
 
 routes.get("/gallery",async(req,res)=>{
@@ -212,6 +219,7 @@ routes.post("/student-login",async(req,res)=>{
     console.log("form is submitted");
     console.log(req.body.email);
     const data=await student.findOne({"email":req.body.email});
+    console.log(data);
     if(data==null){
         res.render("student-login",{loginLogoName:"Login",emailExists:"invalid email"})
             console.log("email already exist");
@@ -228,9 +236,9 @@ routes.post("/student-login",async(req,res)=>{
                  console.log('........ttttttttt.......')
                  console.log(user);
                 
-                res.cookie('jwts',token,{expires:new Date(Date.now()+60*60*1000),httpOnly:true});
+                res.cookie('jwts',token,[{expires:new Date(Date.now()+60*60*1000),httpOnly:true}]);
                     
-                res.render("course-videos",{loginLogoName:data.name.split(' ')[0]});
+                res.redirect("/course1");
                 console.log("email exists");
             }
             else{
@@ -241,8 +249,57 @@ routes.post("/student-login",async(req,res)=>{
 });
 
 //course information..............................................................................................................................................................
-routes.get("/courseInformation",(req,res)=>{
-    res.render("course-information");
+routes.get('/course*',loginPresent,async(req,res)=>{
+    const orgUrl=req.url;
+    const courseNum=orgUrl.slice(7);
+if(courseNum){
+    try{
+    const course=await Course.findOne({"courseNo":courseNum});
+    const videos=await Videos.find();
+    console.log(videos.length)
+    
+    var videosArrays=[];
+    var istSrc;
+    var istTitle
+    var k=0;
+    for(i=0;i<course.demoVideos.length;i++){
+    const Video=await Videos.findOne({"video":course.demoVideos[i]});
+    if(k==0){
+        videosArrays[k]={title:Video.title,videoNo:Video.video,videoKey:Video.videoFile[0].key,thumbnailKey:Video.imageFile[0].key,active:"active"}
+        istSrc=Video.videoFile[0].key;
+        istTitle=Video.title;
+        k++;
+    }
+    else{
+        videosArrays[k]={title:Video.title,videoNo:Video.video,videoKey:Video.videoFile[0].key,thumbnailKey:Video.imageFile[0].key}
+        k++;
+    }
+    
+    }
+    var j=0;
+    for(i=0;i<videos.length;i++){
+        
+        const st=course.demoVideos.includes(i+1);
+        if(st){
+            
+        }
+        else{
+            const VideoRest=await Videos.findOne({"video":i+1});
+            videosArrays[k]={title:VideoRest.title,videoNo:VideoRest.video,thumbnailKey:VideoRest.imageFile[0].key}
+            k++;
+        }
+        
+    }
+    res.render("playVideo",{loginLogoName:req.login,videos:videosArrays,istVideoSrc:istSrc,istVideoTitle:istTitle,courseNo:courseNum});
+    console.log(videosArrays)
+}catch(e){
+      console.log("some wrong url",e);
+}
+}
+else{
+
+}
+    
 })
 //student register...................................................................................................................................................................
 
@@ -250,7 +307,7 @@ routes.get("/student-register",async(req,res)=>{
     res.render("student-register");
     
 });
-routes.post("/course",async(req,res)=>{
+routes.post("/courseafterresgistesr",async(req,res)=>{
     console.log("form is submitted");
     console.log(req.body.email);
     const data=await student.findOne({"email":req.body.email});
@@ -285,6 +342,9 @@ routes.get("/adminLogin",(req,res)=>{
     console.log(req.headers.authorization)
     res.render("admin-login",{loginLogoName:"login"});
 })
+routes.get("/adminUpdate",(req,res)=>{
+       res.render("admin-update");
+})
 routes.post("/adminUpdate",async(req,res)=>{
     var pass=false;
     console.log("form is submitted");
@@ -305,7 +365,7 @@ routes.post("/adminUpdate",async(req,res)=>{
                 const token=await jwt.sign(user,process.env.JWT_SECRET_KEY,{expiresIn:'1h'});
 
                 
-                res.cookie('jwta',token,{expires:new Date(Date.now()+60*60*1000),httpOnly:true});
+                res.cookie('jwta',token,[{expires:new Date(Date.now()+60*60*1000),httpOnly:true}]);
                     
                 res.render("admin-update",{loginLogoName:data.name});
             
@@ -366,9 +426,6 @@ routes.get("/playVideo",async(req,res)=>{
 //     accessKeyId: process.env.ACCESS_KEY,
 //     secretAccessKey: process.env.ACCESS_SECRET
 // });
-routes.get("/adminBack",autha,(req,res)=>{
-    res.render("admin-update");
-})
 //course update.........................................................................................................................................................................................................
 
 // routes.get("/courseUpdate",autha,async(req,res)=>{
@@ -655,11 +712,67 @@ routes.get("/delete-video/*",async(req,res)=>{
    
     
 })
+//cloudfront cookies.............................................................................................................................................................................................
 
 
-            
+const cloudFront = new aws.CloudFront.Signer(
+  process.env.PUBLIC_KEY,
+  process.env.PRIVATE_KEY
+);
 
+const policy = JSON.stringify({
+  Statement: [
+    {
+      Resource: 'http*://cdn.dgblyium5swnb.cloudfront.net.com/*', // http* => http and https
+      Condition: {
+        DateLessThan: {
+          'AWS:EpochTime':
+            Math.floor(new Date().getTime() / 1000) + 60 * 60 * 1, // Current Time in UTC + time in seconds, (60 * 60 * 1 = 1 minute)
+        },
+      },
+    },
+  ],
+});
+routes.get('/login-god',(req,res)=>{
+    res.render('gallery');
+})
+// Handle Login Route
+routes.post('/login-cookies', (req, res) => {
+  /* Code to Verify the credentials */
 
+  // Set Cookies after successful verification
+  console.log("ok this is login-cookies");
+  const cookie = cloudFront.getSignedCookie({
+    policy,
+  });
+
+  
+  console.log("..........stol.....................")
+  console.log(cookie);
+
+  res.cookie('APKAYXNVJUMRPMQASI2X', Object.values(cookie)[1] ,[{
+    domain: 'https://dgblyium5swnb.cloudfront.net/',
+    path: '/',
+    httpOnly: true,
+    
+}]);
+
+  res.cookie('CloudFront-Policy',Object.values(cookie)[0], [{
+    domain: 'https://dgblyium5swnb.cloudfront.net/',
+    path: '/',
+    httpOnly: true,
+  }]);
+
+  res.cookie('CloudFront-Signature', Object.values(cookie)[2], [{
+    domain: 'https://dgblyium5swnb.cloudfront.net/',
+    path: '/',
+    httpOnly: true,
+  }]);
+
+  // Send some response
+  res.send({ some: 'logged' });
+});
+//.............................................................................................................................................................................................................................
 
 
 routes.get('/download',(req,res)=>{

@@ -1,12 +1,121 @@
-<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!doctype html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/static/css/style.css">
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/js/all.min.js"
+    integrity="sha512-naukR7I+Nk6gp7p5TMA4ycgfxaZBJ7MO5iC3Fp6ySQyKFHOGfpkSZkYVWV5R7u7cfAicxanwYQ5D1e17EfJcMA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+  <title>home page</title>
 </head>
+
 <body>
-    <h1>course information</h1>
+  <h1 class="text-center text-secondary">example videos</h1>
+  
+  <section id="course-video-section" class="py-3">
+    <div class="container">
+
+      
+      <div id="total-video-number-div">
+      <h2 id="videosLength-h2">{{videosLength}}</h2>
+      <h4>videos</h4>
+      </div>
+      <div class="row mt-3" >
+        <div class="col-md-4">
+          {{#each videos}}
+          <div class="card my-3">
+            
+            <div class="card-body" >
+              
+
+              {{!-- <div class="container service-icon text-center py-3">
+                <i class="{{this.icon}} text-secondary"></i>
+              </div> --}}
+              
+              <div class="thumbnail-title-div">
+                  <h4 class="video-card-number">number</h4>
+                  <h3 class="video-card-title">title</h3>
+                  <div class="thumbnail-image-div">
+                    
+                    <img class="thumbnail-image-image" src="#" alt="#">
+                    
+                    
+                  </div>
+              
+                  <p class="video-card-description">description</p>
+              </div>
+              <a class="btn btn-primary video-watch-anchor" href="/playVideo" role="button">watch</a>
+              
+              <a class="btn btn-success video-download-anchor" href="#" role="button">|</a>
+
+              
+
+            </div>
+
+          </div>
+          {{/each}}
+        
+
+        </div>
+      </div>
+    </div>
+  
+        
+        <video id="video-iframe" src="/video" id="videoPlayer" width="60%" controls muted="muted" autoplay>
+            <source src="../public/video/WIN_20220803_18_25_32_Pro.mp4" type="video/mkv" />
+        </video>
+    
+  
+  
+  </section>
+  
+    
+  
+     
+            <form class="" action="/paynow" method="post">
+              
+              <div class="form-group">
+                <button class="btn form-control btn-primary">Proceed to Pay</button>
+              </div>
+            </form>
+        
+  </section>
+
+  
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+
+
 </body>
+
 </html>

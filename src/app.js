@@ -39,8 +39,8 @@ hbs.registerPartials("view-folder/partials");
 
 //db connection
 
-const url = `mongodb+srv://node:mongodbnode@englishbrain-mongodb-cl.yzz6zwh.mongodb.net/englishbrain1?retryWrites=true&w=majority`;
-
+//const url = `mongodb+srv://node:mongodbnode@englishbrain-mongodb-cl.yzz6zwh.mongodb.net/englishbrain1?retryWrites=true&w=majority`;
+const url='mongodb://localhost:27017/englishbrain1';
 const connectionParams={
    useNewUrlParser: true, useUnifiedTopology: true
 }
@@ -49,8 +49,9 @@ mongoose.connect(url,connectionParams)
         console.log('Connected to database englishbrain1')
     })
     .catch( (err) => {
-        console.error(`Error connecting to the database. \n${err}`);
-    });
+        console.error(`unable to connect data base \n${err}`);
+        
+   
     // Detail.create({
     //     brandName:"zeza",
     //     brandIconUrl:"#####",
@@ -122,9 +123,10 @@ mongoose.connect(url,connectionParams)
         //     course:[1,2],
         // });
     
-  
+      });
    routes.post("/paynow",(req,res)=>{
-    res.render("payInfo");
+    console.log(req.body.courseNo)
+    res.render("payInfo",{courseNo:req.body.courseNo});
    })
   
   routes.post("/payInfo", [parseUrl, parseJson], (req, res) => {

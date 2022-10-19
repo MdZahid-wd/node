@@ -25,7 +25,7 @@
   {{>navbar loginLogoName=loginLogoName}}
   <section class="adminVideoUpdate-section">
   
-        <a href="/adminBack" for="button" class="btn backArrow-anchor"><</a>
+        <a href="/adminUpdate" for="button" class="btn backArrow-anchor"><</a>
         
         {{!-- first admin manage coloum --}}
         <div class="container">
@@ -56,7 +56,7 @@
                     <label for="file" class="form-label chooseFile-label">upload video's thumbnail</label>
                     <input type="file" accept="image/*" name="imageFile"  class="custome-file-input" required >
                     <label for="file" class="form-label chooseFile-label">upload files related with this video(optional)</label>
-                    <input type="file" accept="file_extension" name="txtFile" " class="custome-file-input" multiple>
+                    <input type="file" accept="file_extension" name="txtFile" class="custome-file-input" multiple>
                     
                     <button  id="upload-button"  class="btn btn-primary btn-block" type="submit" onwaiting="fn()">
                       upload
@@ -86,9 +86,6 @@
       <h4>videos</h4>
       </div>
       <div class="row mt-3" id="card-clone-source">
-
-        {{!-- first service coloum --}}
-        {{!-- {{#each thumbnailsInformation}} --}}
         <div class="col-md-4" id="new-video-div" hidden>
           <div class="card my-3">
             <div class="card-body" >
@@ -99,15 +96,15 @@
               </div> --}}
               
               <div class="thumbnail-title-div">
-              <h4 class="video-card-number">number</h4>
-              <h3 class="video-card-title">title</h3>
-              <div class="thumbnail-image-div">
-                
-                <img class="thumbnail-image-image" src="#" alt="#">
-                
-              </div>
+                  <h4 class="video-card-number">number</h4>
+                  <h3 class="video-card-title">title</h3>
+                  <div class="thumbnail-image-div">
+                    
+                    <img class="thumbnail-image-image" src="#" alt="#">
+                    
+                  </div>
               
-              <p class="video-card-description">description</p>
+                  <p class="video-card-description">description</p>
               </div>
               <a class="btn btn-primary video-watch-anchor" href="/playVideo" role="button">watch</a>
               <a class="btn btn-danger video-delete-anchor" href="#" role="button">delete</a>
