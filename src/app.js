@@ -244,6 +244,6 @@ mongoose.connect(url,connectionParams)
   
 
 
-app.listen(process.env.API_ENDPOINT || 3000,()=>{
-    console.log("server started");
-});
+  app.listen(process.env.PORT||3000,(req,res)=>{
+    console.log("server is running");
+})

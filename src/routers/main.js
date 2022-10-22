@@ -716,18 +716,18 @@ routes.get("/delete-video/*",async(req,res)=>{
 
 
 const cloudFront = new aws.CloudFront.Signer(
-  process.env.PUBLIC_KEY,
+  process.env.KEY_PAIR_ID,
   process.env.PRIVATE_KEY
 );
 
 const policy = JSON.stringify({
   Statement: [
     {
-      Resource: 'http*://cdn.dgblyium5swnb.cloudfront.net.com/*', // http* => http and https
+      Resource: 'https://dgblyium5swnb.cloudfront.net/*', // http* => http and https
       Condition: {
         DateLessThan: {
           'AWS:EpochTime':
-            Math.floor(new Date().getTime() / 1000) + 60 * 60 * 1, // Current Time in UTC + time in seconds, (60 * 60 * 1 = 1 minute)
+            Math.floor(new Date().getTime() / 1000) + 60 * 60 * 12, // Current Time in UTC + time in seconds, (60 * 60 * 1 = 12 minute)
         },
       },
     },
@@ -750,24 +750,27 @@ routes.post('/login-cookies', (req, res) => {
   console.log("..........stol.....................")
   console.log(cookie);
 
-  res.cookie('APKAYXNVJUMRPMQASI2X', Object.values(cookie)[1] ,[{
-    domain: 'https://dgblyium5swnb.cloudfront.net/',
-    path: '/',
+  res.cookie('CloudFront-Key-Pair-Id', (Object.values(cookie)[1]), {
+    domain:'dgblyium5swnb.cloudfront.net',
+    path:'/*.jpg',
     httpOnly: true,
+    secure:true,
+});
+
+  res.cookie('CloudFront-Policy', (Object.values(cookie)[0]), {
+    domain:'dgblyium5swnb.cloudfront.net',
+    path:'/*.jpg',
+    httpOnly: true,
+    secure:true,
     
-}]);
+  });
 
-  res.cookie('CloudFront-Policy',Object.values(cookie)[0], [{
-    domain: 'https://dgblyium5swnb.cloudfront.net/',
-    path: '/',
+  res.cookie('CloudFront-Signature', (Object.values(cookie)[2]), {
+    domain:'dgblyium5swnb.cloudfront.net',
+    path:'/*.jpg',
     httpOnly: true,
-  }]);
-
-  res.cookie('CloudFront-Signature', Object.values(cookie)[2], [{
-    domain: 'https://dgblyium5swnb.cloudfront.net/',
-    path: '/',
-    httpOnly: true,
-  }]);
+    secure:true,
+  });
 
   // Send some response
   res.send({ some: 'logged' });
